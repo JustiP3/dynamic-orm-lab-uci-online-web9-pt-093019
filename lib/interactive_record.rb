@@ -31,10 +31,10 @@ class InteractiveRecord
 
   def self.find_by(attribute)
     key = attribute.keys.first
-    value = attribute.values[0]
+    value = "'#{attribute.values[0]}'"
     binding.pry 
-    sql = "SELECT * FROM #{table_name} WHERE ? = ?;"
-    DB[:conn].execute(sql, key, value)
+    sql = "SELECT * FROM #{table_name} WHERE #{key} = #{value};"
+    DB[:conn].execute(sql)
   end
 
   def table_name_for_insert
